@@ -7,10 +7,14 @@
     <title>Document</title>
 </head>
 <body>
-    <form>
+    <form id="add_todo">
+        <label for="new_todo_field">Lägg till en todo:</label>
         <input type="text" id="new_todo_field">
-       
+        <button type="submit">Lägg till</button>
     </form>
+
+    <h2>Att göra:</h2>
+    <ul id="todo_list"></ul>
 
 
     <script src="./main.js" type="application/javascript"></script>
