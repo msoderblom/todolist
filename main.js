@@ -47,6 +47,14 @@ function deleteListitem(event) {
     
 }
 
+function textFilter(search, list) {
+    const filteredList = list.filter(function (item) {
+        return item.content.toLowerCase().includes(search.toLowerCase())
+    })
+    return filteredList
+    
+}
+
 function drawList(list) {
     toDoUl.innerHTML = ''
     let i = 0
@@ -86,6 +94,11 @@ addToDoForm.addEventListener('submit', function (event) {
     addListitem()
     newToDoField.value = ''
     
+})
+filterField.addEventListener('input', function (event) {
+    const searchWord = event.currentTarget.value
+    const filteredListText = textFilter(searchWord, toDoList)
+    drawList(filteredListText)
 })
 
 dateField.value = getTodaysDate()
