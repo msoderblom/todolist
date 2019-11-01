@@ -8,6 +8,7 @@ const toDoList = []
 const deleteIcon = '🗑️'
 const categorySelect = document.querySelector('#category_select')
 const categories = ['Arbete', 'Hushållsarbete', 'Skola']
+const filterField = document.querySelector('#filter')
 
 /*****************************/
 

@@ -8,20 +8,27 @@
     <title>Document</title>
 </head>
 <body>
-    <form id="add_todo">
-        <label for="new_todo_field">Lägg till en todo:</label>
-        <input type="text" id="new_todo_field">
-        <label for="date">Välj slutdatum:</label>
-        <input type="date" name="date" id="date_field">
-        <select name="categories" id="category_select">
-            <option value="" disabled selected>Välj en kategori</option>
-        </select>
-        <button type="submit">Lägg till</button>
-    </form>
+    <main>
+        <form id="add_todo">
+            <label for="new_todo_field">Lägg till en todo:</label>
+            <input type="text" id="new_todo_field">
+            <label for="date">Välj slutdatum:</label>
+            <input type="date" name="date" id="date_field">
+            <select name="categories" id="category_select">
+                <option value="" disabled selected>Välj en kategori</option>
+            </select>
+            <button type="submit">Lägg till</button>
+        </form>
+        
+        <div>
+            <label for="filter">Filtrera på:</label>
+            <input type="text" name="filter" id="filter">
+            <h2>Att göra:</h2>
+            <ul id="todo_list"></ul>
+        </div>
 
-    <h2>Att göra:</h2>
-    <ul id="todo_list"></ul>
-
+        
+    </main>
 
     <script src="./main.js" type="application/javascript"></script>
 </body>
