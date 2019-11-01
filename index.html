@@ -11,7 +11,11 @@
     <form id="add_todo">
         <label for="new_todo_field">Lägg till en todo:</label>
         <input type="text" id="new_todo_field">
+        <label for="date">Välj slutdatum:</label>
         <input type="date" name="date" id="date_field">
+        <select name="categories" id="category_select">
+            <option value="" disabled selected>Välj en kategori</option>
+        </select>
         <button type="submit">Lägg till</button>
     </form>
 

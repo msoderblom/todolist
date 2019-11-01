@@ -6,6 +6,8 @@ const dateField = document.querySelector('#date_field')
 const toDoUl = document.querySelector('#todo_list')
 const toDoList = []
 const deleteIcon = '🗑️'
+const categorySelect = document.querySelector('#category_select')
+const categories = ['Arbete', 'Hushållsarbete', 'Skola']
 
 /*****************************/
 
@@ -23,9 +25,12 @@ function addZero(num) {
     return num
 }
 
-function addToList() {
+function addListitem() {
     const newToDo = newToDoField.value
-    toDoList.push(newToDo)
+    toDoList.push({
+        content: newToDo,
+        deadline: dateField.value
+    })
     drawList(toDoList)
     
 }
@@ -48,30 +53,47 @@ function drawList(list) {
     list.forEach(item => {
         const li = document.createElement('li')
         li.dataset.listitem = i
+        li.textContent = item.content + item.deadline
         const deleteBtn = document.createElement('span')
         deleteBtn.dataset.listitem = i
         deleteBtn.textContent = deleteIcon
         deleteBtn.classList.add('delete_btn')
         deleteBtn.addEventListener('click', deleteListitem)
-        li.textContent = item 
+        
         li.appendChild(deleteBtn)
         toDoUl.appendChild(li)
 
         i++
     });
 }
+function drawCategoriesOptions() {
+      categories.forEach(category => {
+        const opt = document.createElement('option')
+        opt.value = category
+        opt.textContent = category
+        categorySelect.appendChild(opt)
+    });
+}
+function drawCategoriesFilters() {
+    
+}
 
 
 addToDoForm.addEventListener('submit', function (event) {
     event.preventDefault()
 
-    addToList()
+    addListitem()
     newToDoField.value = ''
     
 })
 
-
 dateField.value = getTodaysDate()
+drawCategoriesOptions()
+
+
+    
+
+
 
 
 
