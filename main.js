@@ -9,6 +9,7 @@ const deleteIcon = '🗑️'
 const categorySelect = document.querySelector('#category_select')
 const categories = ['Arbete', 'Hushållsarbete', 'Skola']
 const filterField = document.querySelector('#filter')
+const filterButtonDiv = document.querySelector('#category_filter_buttons') 
 
 /*****************************/
 
@@ -84,6 +85,18 @@ function drawCategoriesOptions() {
     });
 }
 function drawCategoriesFilters() {
+    categories.forEach(category => {
+        const label = document.createElement('label')
+        const rBtn = document.createElement('input')
+        rBtn.type = 'radio'
+        rBtn.value = category
+        rBtn.name = 'category'
+
+        label.textContent = category
+        label.prepend(rBtn)
+        
+        filterButtonDiv.appendChild(label)
+    });
     
 }
 
@@ -103,6 +116,7 @@ filterField.addEventListener('input', function (event) {
 
 dateField.value = getTodaysDate()
 drawCategoriesOptions()
+drawCategoriesFilters()
 
 
     
