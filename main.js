@@ -3,9 +3,8 @@
 const addToDoForm = document.querySelector('#add_todo')
 const newToDoField = document.querySelector('#new_todo_field')
 const dateField = document.querySelector('#date_field')
-const toDoUl = document.querySelector('#todo_list')
+const toDoListElement = document.querySelector('#todo_list')
 const toDoList = []
-const deleteIcon = '🗑️'
 const categorySelect = document.querySelector('#category_select')
 const categories = ['Arbete', 'Hushållsarbete', 'Skola']
 const filterField = document.querySelector('#filter')
@@ -31,8 +30,10 @@ function addListitem() {
     const newToDo = newToDoField.value
     toDoList.push({
         content: newToDo,
-        deadline: dateField.value
+        deadline: dateField.value,
+        category: categorySelect.value
     })
+    
     drawList(toDoList)
     
 }
@@ -57,21 +58,48 @@ function textFilter(search, list) {
 }
 
 function drawList(list) {
-    toDoUl.innerHTML = ''
+    toDoListElement.innerHTML = ''
     let i = 0
 
     list.forEach(item => {
-        const li = document.createElement('li')
-        li.dataset.listitem = i
-        li.textContent = item.content + item.deadline
-        const deleteBtn = document.createElement('span')
-        deleteBtn.dataset.listitem = i
-        deleteBtn.textContent = deleteIcon
-        deleteBtn.classList.add('delete_btn')
-        deleteBtn.addEventListener('click', deleteListitem)
+        // Skapar div för varje todo
+        const listitem = document.createElement('div')
+        listitem.dataset.listitem = i
+
+        // Skapar p för texten
+        const itemContent = document.createElement('p')
+        itemContent.classList.add('item_content')
+        itemContent.textContent = item.content
+        listitem.appendChild(itemContent)
         
-        li.appendChild(deleteBtn)
-        toDoUl.appendChild(li)
+        // Lägger till datum 
+        const endDate = document.createElement('time')
+        endDate.textContent = item.deadline
+        endDate.dateTime = item.deadline
+        const dateIcon = document.createElement('i')
+        dateIcon.classList.add('fas', 'fa-calendar-alt')
+        endDate.prepend(dateIcon)
+        listitem.appendChild(endDate)
+
+        // Lägger till kategori
+        const categoryP = document.createElement('p')
+        categoryP.classList.add('category_tag')
+        categoryP.textContent = item.category
+        const categoryIcon = document.createElement('i')
+        categoryIcon.classList.add('fas', 'fa-tag')
+        categoryP.prepend(categoryIcon)
+        listitem.appendChild(categoryP)
+        
+
+        //listitem.textContent = item.content + item.deadline + item.category
+        //const deleteBtn = document.createElement('i')
+        //deleteBtn.dataset.listitem = i
+        //deleteBtn.classList.add(deleteIcon)
+        //deleteBtn.classList.add('delete_btn')
+        //deleteBtn.addEventListener('click', deleteListitem)
+        
+        //listitem.appendChild(deleteBtn)
+        toDoListElement.appendChild(listitem)
 
         i++
     });
