@@ -62,6 +62,18 @@ function textFilter(search, list) {
         return item.content.toLowerCase().includes(search.toLowerCase())
     })
     return filteredList
+}
+function categoryFilter(event) {
+    const theCategory = event.currentTarget.value
+    if (theCategory !== 'Alla') {
+        const filteredList = toDoList.filter(function (item) {
+            return item.category.includes(theCategory)
+        })
+        drawList(filteredList)   
+    }
+    else {
+        drawList(toDoList)
+    }
     
 }
 
@@ -131,11 +143,15 @@ function drawCategoriesFilters() {
         rBtn.value = category
         rBtn.name = 'category'
 
+        rBtn.addEventListener('click', categoryFilter)
         label.textContent = category
         label.prepend(rBtn)
         
         filterButtonDiv.appendChild(label)
     });
+    const allBtn = document.querySelector('#all_categories')
+    allBtn.addEventListener('click', categoryFilter)
+
     
 }
 
