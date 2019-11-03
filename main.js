@@ -34,28 +34,19 @@ function addListitem() {
         category: categorySelect.value
     })
     
-    drawList(toDoList)
+    drawList(toDoList, true)
     
 }
 function deleteListitem(event) {
-    deleteBtnNum = event.currentTarget.dataset.listitem
-    const listitems = document.querySelectorAll('.item_content')   
-    let targetItem = ''
+    deleteBtnNum = parseInt(event.currentTarget.dataset.listitem)
 
-    for (let i = 0; i < listitems.length; i++) {
-        
-        if (listitems[i].dataset.listitem === deleteBtnNum) {
-            targetItem = listitems[i].textContent            
-        }
-    }
-    
     const deleteIndex = toDoList.findIndex(function (item) {
-        return item.content === targetItem
+        return item.idNum === deleteBtnNum
     })
-    
     toDoList.splice(deleteIndex, 1)
-    drawList(toDoList)    
+    drawList(toDoList)  
 }
+
 
 function textFilter(search, list) {
     const filteredList = list.filter(function (item) {
@@ -63,40 +54,47 @@ function textFilter(search, list) {
     })
     return filteredList
 }
-function categoryFilter(event) {
-    const theCategory = event.currentTarget.value
+function categoryFilter() {
+    const theCategory = document
+                        .querySelector('#category_filter_buttons input:checked')
+                        .value
+    
     if (theCategory !== 'Alla') {
         const filteredList = toDoList.filter(function (item) {
             return item.category.includes(theCategory)
         })
-        drawList(filteredList)   
+        drawList(filteredList)
+        return filteredList 
     }
     else {
         drawList(toDoList)
+        return toDoList
     }
     
 }
 
-function drawList(list) {
+function drawList(list, isNewItem = false) {
     toDoListElement.innerHTML = ''
     let i = 0
 
     list.forEach(item => {
-        toDoList[i].idNum = i
+        if (isNewItem) {
+            toDoList[i].idNum = i
+        }
+        
 
         // Skapar div för varje todo
         const listitem = document.createElement('div')
-        listitem.dataset.listitem = i
         listitem.classList.add('listitem')
 
         // Skapar p för texten och radera-knapp
         const itemContent = document.createElement('p')
         itemContent.classList.add('item_content')
-        itemContent.dataset.listitem = i
+        //itemContent.dataset.listitem = i
         itemContent.textContent = item.content
 
         const deleteBtn = document.createElement('i')
-        deleteBtn.dataset.listitem = i
+        deleteBtn.dataset.listitem = item.idNum
         deleteBtn.classList.add('fas', 'fa-trash-alt', 'delete_btn')
         deleteBtn.addEventListener('click', deleteListitem)
         itemContent.appendChild(deleteBtn)
@@ -120,7 +118,6 @@ function drawList(list) {
         categoryIcon.classList.add('fas', 'fa-tag')
         categoryP.prepend(categoryIcon)
         listitem.appendChild(categoryP)
-        
         
         toDoListElement.appendChild(listitem)
 
@@ -164,18 +161,32 @@ addToDoForm.addEventListener('submit', function (event) {
     
 })
 filterField.addEventListener('input', function (event) {
+    const filteredByCategory = categoryFilter()
     const searchWord = event.currentTarget.value
-    const filteredListText = textFilter(searchWord, toDoList)
-    drawList(filteredListText)
+    const filteredByText = textFilter(searchWord, filteredByCategory)
+    drawList(filteredByText)
 })
+
 
 dateField.value = getTodaysDate()
 drawCategoriesOptions()
 drawCategoriesFilters()
 
+setInterval( checkDeadline, 86400000);
 
-    
 
+function checkDeadline() {
+    const today = new Date()
+    toDoList.forEach(item => {
+        const dateParts = item.deadline.split('-')
+        const deadline = new Date(dateParts[0], dateParts[1]-1, dateParts[2])        
+        
+        if (today > deadline) {
+            item.pastDeadline = true
+        }
+        
+    });
+}
 
 
 

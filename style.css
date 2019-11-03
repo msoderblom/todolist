@@ -43,3 +43,6 @@ label {
 .delete_btn:hover {
     cursor: pointer;
 }
+.past_deadline{
+    color: red;
+}
