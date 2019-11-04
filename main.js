@@ -8,7 +8,8 @@ const toDoList = []
 const categorySelect = document.querySelector('#category_select')
 const categories = ['Arbete', 'Hushållsarbete', 'Skola']
 const filterField = document.querySelector('#filter')
-const filterButtonDiv = document.querySelector('#category_filter_buttons') 
+const filterButtonDiv = document.querySelector('#category_filter_buttons')
+const  oneDayMillisec = 86400000
 
 /*****************************/
 
@@ -33,8 +34,8 @@ function addListitem() {
         deadline: dateField.value,
         category: categorySelect.value
     })
-    
-    drawList(toDoList, true)
+    checkDeadline()
+    drawList(true)
     
 }
 function deleteListitem(event) {
@@ -44,13 +45,15 @@ function deleteListitem(event) {
         return item.idNum === deleteBtnNum
     })
     toDoList.splice(deleteIndex, 1)
-    drawList(toDoList)  
+    drawList()  
 }
 
 
-function textFilter(search, list) {
+function textFilter(list) {
+    
+    const searchWord = filterField.value
     const filteredList = list.filter(function (item) {
-        return item.content.toLowerCase().includes(search.toLowerCase())
+        return item.content.toLowerCase().includes(searchWord.toLowerCase())
     })
     return filteredList
 }
@@ -63,25 +66,28 @@ function categoryFilter() {
         const filteredList = toDoList.filter(function (item) {
             return item.category.includes(theCategory)
         })
-        drawList(filteredList)
+        
         return filteredList 
     }
     else {
-        drawList(toDoList)
+        console.log(toDoList);
+        
         return toDoList
     }
     
 }
 
-function drawList(list, isNewItem = false) {
+function drawList(isNewItem = false) {
+    
+    const filteredList = textFilter(categoryFilter())
+
     toDoListElement.innerHTML = ''
     let i = 0
 
-    list.forEach(item => {
+    filteredList.forEach(item => {
         if (isNewItem) {
             toDoList[i].idNum = i
         }
-        
 
         // Skapar div för varje todo
         const listitem = document.createElement('div')
@@ -107,6 +113,9 @@ function drawList(list, isNewItem = false) {
         endDate.dateTime = item.deadline
         const dateIcon = document.createElement('i')
         dateIcon.classList.add('fas', 'fa-calendar-alt')
+        if (item.pastDeadline) {
+            endDate.classList.add('past_deadline')
+        }
         endDate.prepend(dateIcon)
         listitem.appendChild(endDate)
 
@@ -140,14 +149,14 @@ function drawCategoriesFilters() {
         rBtn.value = category
         rBtn.name = 'category'
 
-        rBtn.addEventListener('click', categoryFilter)
+        rBtn.addEventListener('click', drawList)
         label.textContent = category
         label.prepend(rBtn)
         
         filterButtonDiv.appendChild(label)
     });
     const allBtn = document.querySelector('#all_categories')
-    allBtn.addEventListener('click', categoryFilter)
+    allBtn.addEventListener('click', drawList)
 
     
 }
@@ -160,19 +169,14 @@ addToDoForm.addEventListener('submit', function (event) {
     newToDoField.value = ''
     
 })
-filterField.addEventListener('input', function (event) {
-    const filteredByCategory = categoryFilter()
-    const searchWord = event.currentTarget.value
-    const filteredByText = textFilter(searchWord, filteredByCategory)
-    drawList(filteredByText)
-})
+filterField.addEventListener('input', drawList)
 
 
 dateField.value = getTodaysDate()
 drawCategoriesOptions()
 drawCategoriesFilters()
 
-setInterval( checkDeadline, 86400000);
+setInterval( checkDeadline, oneDayMillisec/2);
 
 
 function checkDeadline() {
@@ -180,10 +184,12 @@ function checkDeadline() {
     toDoList.forEach(item => {
         const dateParts = item.deadline.split('-')
         const deadline = new Date(dateParts[0], dateParts[1]-1, dateParts[2])        
-        
-        if (today > deadline) {
+        const diff = today - deadline
+
+        if (diff > oneDayMillisec) {
             item.pastDeadline = true
         }
+        drawList()
         
     });
 }
