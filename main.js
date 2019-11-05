@@ -92,18 +92,21 @@ function drawList(isNewItem = false) {
         listitem.classList.add('listitem')
 
         // Skapar p för texten och radera-knapp
+        const contentDiv = document.createElement('div')
+        contentDiv.classList.add('content_div')
+
         const itemContent = document.createElement('p')
         itemContent.classList.add('item_content')
-        //itemContent.dataset.listitem = i
         itemContent.textContent = item.content
+        contentDiv.appendChild(itemContent)
 
         const deleteBtn = document.createElement('i')
         deleteBtn.dataset.listitem = item.idNum
         deleteBtn.classList.add('fas', 'fa-trash', 'delete_btn')
         deleteBtn.addEventListener('click', deleteListitem)
-        itemContent.appendChild(deleteBtn)
+        contentDiv.appendChild(deleteBtn)
         
-        listitem.appendChild(itemContent)
+        listitem.appendChild(contentDiv)
         
         // Lägger till datum 
         const endDate = document.createElement('time')

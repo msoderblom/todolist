@@ -20,14 +20,15 @@ main {
 }
 
 #add_todo {
- 
+    position: absolute;
+    bottom: 0;
 }
 #add_todo label {
     display: inline-block;
     width: 100%;
     
 }
-#new_todo_field {
+#new_todo_field, #filter {
     width: 96%;
     font-size: 6vw;
     padding: 5px;
@@ -70,15 +71,21 @@ main {
     margin-top: 10px;
 }
 
+#filter_div {
+    margin-top: 10px;
+}
 #category_filter_buttons label {
     display: inline-block;
 }
 
 #todo_list {
-    max-height: 400px;
+    max-height: 300px;
     overflow-y: scroll;
     padding-left: 15px;
     padding-right: 15px;
+}
+.content_div {
+    height: fit-content;
 }
 
 .listitem{
@@ -86,13 +93,21 @@ main {
     padding-top: 10px;
 }
 .item_content {
+    display: inline-block;
+    height: fit-content;
     font-size: 7vw;
     margin-bottom: 2px;
     margin-top: 0;
-    line-height: 1;
+    margin-right: 0;
+    line-height: 1.2;
     font-weight: 400;
+    max-width: 90%;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    overflow-wrap: normal;
+
 }
-.item_content i {
+.content_div i {
     font-size: 5.5vw;
 }
 .category_tag {
