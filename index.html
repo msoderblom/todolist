@@ -12,11 +12,15 @@
         <h1>Att-göra-lista</h1>
     </header>
     <main>
-        <div>
-            <h2>Att göra:</h2>
-            <div id="todo_list"></div>
-            <div id="filter_div">
+        <div id="todo_list"></div>
+        <div id="control_panel">
+            <div id="switch_btn">
+                <p id="switch_add" class="switch_active">Lägg till</p>
+                <p id="switch_filter">Filtrera</p>
+            </div>
+            <div id="filter_div" class="hide">
                 <label for="filter">Filtrera på:</label>
+               
                 <input type="text" name="filter" id="filter">
                 <div id="category_filter_buttons">
                     <label for="all_categories">
@@ -25,25 +29,20 @@
                     </label>
                 </div>
             </div>
-            
+            <form id="add_todo">
+                <input type="text" id="new_todo_field" placeholder="Lägg till en uppgift">
+                <div class="form_div" id="date_box">
+                    <label for="date">Välj slutdatum:</label>
+                    <input type="date" name="date" id="date_field">
+                </div>
+                <div class="form_div" id="category_box"> 
+                    <label for="date">Välj kategori:</label>
+                    <select name="categories" id="category_select"></select>
+                </div>
+                <button type="submit">Lägg till</button>
+            </form>
             
         </div>
-
-        <form id="add_todo">
-            <input type="text" id="new_todo_field" placeholder="Lägg till en uppgift">
-            <div class="form_div" id="date_box">
-                <label for="date">Välj slutdatum:</label>
-                <input type="date" name="date" id="date_field">
-            </div>
-            <div class="form_div" id="category_box"> 
-                <label for="date">Välj kategori:</label>
-                <select name="categories" id="category_select"></select>
-            </div>
-            <button type="submit">Lägg till</button>
-        </form>
-        
-        
-
         
     </main>
     <script src="https://kit.fontawesome.com/089ad18a01.js" crossorigin="anonymous"></script>

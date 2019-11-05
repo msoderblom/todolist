@@ -10,6 +10,10 @@ const categories = ['Allmänt','Arbete', 'Hem', 'Skola']
 const filterField = document.querySelector('#filter')
 const filterButtonDiv = document.querySelector('#category_filter_buttons')
 const  oneDayMillisec = 86400000
+const switchAddItem = document.querySelector('#switch_add')
+const switchFilter = document.querySelector('#switch_filter')
+const filterDiv = document.querySelector('#filter_div')
+
 
 /*****************************/
 
@@ -195,8 +199,25 @@ function checkDeadline() {
     });
 }
 
+function switchView(event) {
+    if (event.currentTarget.id === 'switch_add') {
+        switchAddItem.classList.add('switch_active')
+        switchFilter.classList.remove('switch_active')
 
+        addToDoForm.classList.remove('hide')
+        filterDiv.classList.add('hide')
+    }
+    else {
+        switchFilter.classList.add('switch_active')
+        switchAddItem.classList.remove('switch_active')
 
+        filterDiv.classList.remove('hide')
+        addToDoForm.classList.add('hide')
+    }
+}
+
+switchFilter.addEventListener('click', switchView)
+switchAddItem.addEventListener('click', switchView)
 
 
 
