@@ -5,18 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="style.css" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">    <title>To Do</title>
-</head>
-<body>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet"></head>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700&display=swap" rel="stylesheet">
+    <body>
+    <header>
+        <h1>Att-göra-lista</h1>
+    </header>
     <main>
         <form id="add_todo">
-            <label for="new_todo_field">Lägg till en todo:</label>
-            <input type="text" id="new_todo_field">
-            <label for="date">Välj slutdatum:</label>
-            <input type="date" name="date" id="date_field">
-            <select name="categories" id="category_select">
-                <option value="" disabled selected>Välj en kategori</option>
-            </select>
+            <input type="text" id="new_todo_field" placeholder="Lägg till en uppgift">
+            <div class="form_div" id="date_box">
+                <label for="date">Välj slutdatum:</label>
+                <input type="date" name="date" id="date_field">
+            </div>
+            <div class="form_div" id="category_box"> 
+                <label for="date">Välj kategori:</label>
+                <select name="categories" id="category_select"></select>
+            </div>
+            
+            
             <button type="submit">Lägg till</button>
         </form>
         

@@ -1,27 +1,99 @@
 body {
-    font-family: 'Lato', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     color: black;
+    padding: 0;
+    margin: 0;
+}
+header {
+    background: cornflowerblue;
+}
+h1 {
+    text-align: center;
+    margin: 0;
+    color: white;
+    font-size: 1.5em;
+    font-weight: 300;
+    padding: 5px;
+}
+main {
+    margin: 2%;
 }
 
-label {
-    display: block;
+#add_todo {
+ 
+}
+#add_todo label {
+    display: inline-block;
+    width: 100%;
+    
 }
 #new_todo_field {
-    width: 90%;
+    width: 96%;
+    font-size: 6vw;
+    padding: 5px;
+    border-radius: 25px;
+    margin-bottom: 5px;
+    
+}
+.form_div {
+    display: inline-block;
+    width: 45%;
 }
 
+#category_box {
+    float: right;
+}
 
+#date_field {
+    padding: 2px;
+    font-size: 4vw;
+    border-radius: 25px;
+    width: 100%;
+}
+#category_select {
+    padding: 5px;
+    font-size: 4vw;
+    border-radius: 25px;
+    width: 100%;
+}
+#add_todo button {
+    display: block;
+    color: black;
+    font-family: 'Lato';
+    font-size: 1rem;
+    padding: 10px;
+    width: 100%;
+    text-transform: uppercase;
+    border: solid 1px black;
+    border-radius: 25px;
+    background: transparent;
+    margin-top: 10px;
+}
+
+#category_filter_buttons label {
+    display: inline-block;
+}
+
+#todo_list {
+    max-height: 400px;
+    overflow-y: scroll;
+    padding-left: 15px;
+    padding-right: 15px;
+}
 
 .listitem{
     border-bottom: solid 0.5px black;
     padding-top: 10px;
 }
 .item_content {
-    font-size: 4vw;
+    font-size: 7vw;
     margin-bottom: 2px;
     margin-top: 0;
     line-height: 1;
-    font-weight: 600;
+    font-weight: 400;
+}
+.item_content i {
+    font-size: 5.5vw;
 }
 .category_tag {
     display: inline-block;
@@ -30,12 +102,14 @@ label {
     margin-left: 2%; 
 }
 .category_tag, time {
-    color: rgba(0, 0, 0, 50%);
-    font-size: 2vw;
+    color: rgba(0, 0, 0, 30%);
+    font-weight: 600;
+    font-size: 3vw;
 }
 
 .category_tag i, time i {
     padding-right: 4px;
+    color: rgba(0, 0, 0, 50%);
 }
 .delete_btn {
     float: right;

@@ -6,7 +6,7 @@ const dateField = document.querySelector('#date_field')
 const toDoListElement = document.querySelector('#todo_list')
 const toDoList = []
 const categorySelect = document.querySelector('#category_select')
-const categories = ['Arbete', 'Hushållsarbete', 'Skola']
+const categories = ['Allmänt','Arbete', 'Hem', 'Skola']
 const filterField = document.querySelector('#filter')
 const filterButtonDiv = document.querySelector('#category_filter_buttons')
 const  oneDayMillisec = 86400000
@@ -69,9 +69,7 @@ function categoryFilter() {
         
         return filteredList 
     }
-    else {
-        console.log(toDoList);
-        
+    else {       
         return toDoList
     }
     
@@ -101,7 +99,7 @@ function drawList(isNewItem = false) {
 
         const deleteBtn = document.createElement('i')
         deleteBtn.dataset.listitem = item.idNum
-        deleteBtn.classList.add('fas', 'fa-trash-alt', 'delete_btn')
+        deleteBtn.classList.add('fas', 'fa-trash', 'delete_btn')
         deleteBtn.addEventListener('click', deleteListitem)
         itemContent.appendChild(deleteBtn)
         
