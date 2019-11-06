@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700&display=swap" rel="stylesheet">
     <body>
     <header>
-        <h1>Att-göra-lista</h1>
+        <h1>Just Do It</h1>
     </header>
     <main>
         <div id="todo_list"></div>
@@ -18,19 +18,9 @@
                 <p id="switch_add" class="switch_active">Lägg till</p>
                 <p id="switch_filter">Filtrera</p>
             </div>
-            <div id="filter_div" class="hide">
-                <label for="filter">Filtrera på:</label>
-               
-                <input type="text" name="filter" id="filter">
-                <div id="category_filter_buttons">
-                    <label for="all_categories">
-                        <input type="radio" name="category" value="Alla"id="all_categories" checked>
-                        Alla
-                    </label>
-                </div>
-            </div>
+            
             <form id="add_todo">
-                <input type="text" id="new_todo_field" placeholder="Lägg till en uppgift">
+                <input type="text" id="new_todo_field" placeholder="Lägg till en uppgift...">
                 <div class="form_div" id="date_box">
                     <label for="date">Välj slutdatum:</label>
                     <input type="date" name="date" id="date_field">
@@ -41,6 +31,17 @@
                 </div>
                 <button type="submit">Lägg till</button>
             </form>
+
+            <div id="filter_div" class="hide">
+               
+                <input type="text" name="filter" id="filter" placeholder="Filtrera...">
+                <div id="category_filter_buttons">
+                    <label for="all_categories">
+                        <input type="radio" name="category" value="Alla"id="all_categories" checked>
+                        Alla
+                    </label>
+                </div>
+            </div>
             
         </div>
         
